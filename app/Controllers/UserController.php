@@ -7,6 +7,9 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class UserController extends BaseController
 {
+    /**
+     * @return string
+     */
     public function index()
     {
         $data   =   [
@@ -16,4 +19,16 @@ class UserController extends BaseController
         $renderT    =   \Config\Services::renderer();
         return $renderT->setData( $data )->render( 'Pages/Login' );
     }
+
+    public function register()
+    {
+        $data   =   [
+            'title' =>  'Register'
+        ];
+
+        $renderT    =   \Config\Services::renderer();
+        return $renderT->setData( $data )->render( 'Pages/Register' );
+    }
+
+
 }
