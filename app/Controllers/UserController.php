@@ -10,6 +10,9 @@ class UserController extends BaseController
 {
     private $userModel;
 
+    /**
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->userModel    =   new UserModel();
@@ -52,6 +55,9 @@ class UserController extends BaseController
                 $data[ 'validation' ]   =   $this->validator;
             }else{
                 $user   =   $this->userModel->where('email', $this->request->getVar( 'emailFrm' ) )->first();
+                $this->setUserSession( $user );
+                return redirect()->to( '/dashboard' );
+
             }
         }
 
@@ -59,6 +65,23 @@ class UserController extends BaseController
         return $renderT->setData( $data )->render( 'Pages/Login' );
     }
 
+
+    public function setUserSession( $user )
+    {
+        $data   =   [
+            'id'         => $user[ 'id' ],
+            'name'       => $user[ 'name' ],
+            'email'      => $user[ 'email' ],
+            'isLoggedIn' => true
+        ];
+        session()->set( $data );
+        return true;
+    }
+
+    /**
+     * @return \CodeIgniter\HTTP\RedirectResponse|string
+     * @throws \ReflectionException
+     */
     public function register()
     {
         helper( ['form'] );
@@ -126,6 +149,15 @@ class UserController extends BaseController
 
         $renderT    =   \Config\Services::renderer();
         return $renderT->setData( $data )->render( 'Pages/Register' );
+    }
+
+    /**
+     * @return \CodeIgniter\HTTP\RedirectResponse
+     */
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to( '/' );
     }
 
 

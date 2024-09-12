@@ -30,6 +30,26 @@ if ( isset( $validation ) ){
         </div>
         <div class="col-6">
 
+
+            <!--
+             *
+             * Confirmation
+             * @since 12.09.2024
+             * @author MiSCapu
+             -->
+            <?php
+                if ( session()->get( 'success' ) )
+                {
+                    ?>
+                    <div class="alert alert-success">
+                        <?= session()->get( 'success' ); ?>
+                    </div>
+            <?php
+                }
+
+            ?>
+
+
             <!-- form Bootstrap -->
 
             <form method="post">
