@@ -1,7 +1,25 @@
 <?= $this->extend( 'Layouts/Main' );?>
 <?= $this->section( 'content' );?>
 
+<?php
+/**
+ * @since 11.09.2024
+ * @author MiSCapu
+ * Validations
+ */
+if ( isset( $validation ) ){
+    $validation =   \Config\Services::validation();
 
+    if ( $validation->hasError( 'emailFrm' ) ){
+        $errorEmailFrm =   $validation->getError( 'emailFrm' );
+    }
+
+    if ( $validation->hasError( 'pwdFrm' ) ){
+        $errorPwdFrm =   $validation->getError( 'pwdFrm' );
+    }
+}
+
+?>
 <!-- Grid Bootstrap -->
 
 <div class="container">
@@ -16,12 +34,13 @@
 
             <form method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" name="emailFrm" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="emailFrm" class="form-label">Email address</label>
+                    <input type="email" name="emailFrm" class="form-control" id="emailFrm" aria-describedby="emailHelp" value="<?= set_value( 'emailFrm' )?>">
+                    <?= isset( $errorEmailFrm ) ? "<div class='alert alert-danger' role='alert'>".$errorEmailFrm."</div>" : ""?>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" name="pwdFrm" class="form-control" id="exampleInputPassword1">
+                    <label for="pwdFrm" class="form-label">Password</label>
+                    <input type="password" name="pwdFrm" class="form-control" id="pwdFrm">
                 </div>
 <!--                <div class="mb-3 form-check">-->
 <!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
@@ -31,6 +50,11 @@
             </form>
 
             <!-- form Bootstrap End -->
+
+            <!-- button Register -->
+            <div class="my-3">
+                <a href="<?= site_url(  '/register' )?>" class="btn btn-success">Register</a>
+            </div>
 
         </div>
         <div class="col-3>

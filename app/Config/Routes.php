@@ -5,5 +5,5 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'UserController::index');
-$routes->get('/register', 'UserController::register');
+$routes->match( [ 'get', 'post' ],'/', 'UserController::index');
+$routes->match( [ 'get', 'post' ],'/register', 'UserController::register');
