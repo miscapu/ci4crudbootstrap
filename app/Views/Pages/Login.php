@@ -61,6 +61,7 @@ if ( isset( $validation ) ){
                 <div class="mb-3">
                     <label for="pwdFrm" class="form-label">Password</label>
                     <input type="password" name="pwdFrm" class="form-control" id="pwdFrm">
+                    <?= isset( $errorPwdFrm ) ? "<div class='alert alert-danger' role='alert'>".$errorPwdFrm."</div>" : ""?>
                 </div>
 <!--                <div class="mb-3 form-check">-->
 <!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->

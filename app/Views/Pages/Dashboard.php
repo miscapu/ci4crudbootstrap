@@ -6,54 +6,32 @@
 <?= $this->include( 'Layouts/NavBar' ); ?>
 <!-- NavBar Bootstrap End -->
 
-
-
 <!-- Grid Bootstrap -->
 
+<h2 class="modal-title text-center my-4"><?= isset( $title ) ? esc( $title ) : "Document"; ?></h2>
+
 <div class="container">
-    <h2 class="modal-title text-center my-lg-4"><?= isset( $title ) ? esc( $title ) : ""; ?></h2>
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
 
         </div>
-        <div class="col-6">
-
-            <!-- Table Bootstrap -->
-
+        <div class="col-8">
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                <tbody class = "usersData">
+
                 </tbody>
             </table>
-
-            <!-- Table Bootstrap End -->
-
         </div>
-        <div class="col-3>
+        <div class="col-2">
 
         </div>
     </div>
@@ -62,5 +40,58 @@
 <!-- Grid Bootstrap End -->
 
 <?= $this->endSection();?>
+
+
+<?= $this->section( 'scripts' ); ?>
+
+<script src="<?= base_url( 'assets/js/jquery.min.js' )?>""></script>
+<script src="<?= base_url( 'assets/js/popper.min.js' )?>""></script>
+<script src="<?= base_url( 'assets/js/bootstrap.min.js' )?>""></script>
+
+
+<script>
+
+    /**
+     * Show all users
+     * @since 15.09.2024
+     * @author MiSCapu
+     */
+    $(document).ready(function () {
+       loadUsers();
+    });
+
+
+    /**
+     * Function loadUsers than show all users
+     * @since 15.09.2024
+     * @author MiSCapu
+     */
+    function loadUsers()
+    {
+        $.ajax({
+            method: "GET",
+            url: "<?= site_url( 'show-all' )?>",
+            success: function (response) {
+                $.each(response.users, function (key,value) {
+                    //console.log(value['name']);
+                    $('.usersData').append('<tr>\
+                        <td class="user_id">'+value['id']+'</td>\
+                        <td>'+value['name']+'</td>\
+                        <td>'+value['email']+'</td>\
+                        <td>'+value['created_at']+'</td>\
+                        <td>\
+                                <a href="#" class="btn badge btn-info view_btn">View</a>\
+                                <a href="#" class="btn badge btn-primary view_btn">Edit</a>\
+                                <a href="#" class="btn badge btn-danger view_btn">Delete</a>\
+                        </td>\
+                        </tr>');
+                });
+            }
+        });
+    }
+
+</script>
+
+<?= $this->endSection(); ?>
 
 
