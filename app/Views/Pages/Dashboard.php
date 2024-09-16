@@ -44,10 +44,6 @@
 
 <?= $this->section( 'scripts' ); ?>
 
-<script src="<?= base_url( 'assets/js/jquery.min.js' )?>""></script>
-<script src="<?= base_url( 'assets/js/popper.min.js' )?>""></script>
-<script src="<?= base_url( 'assets/js/bootstrap.min.js' )?>""></script>
-
 
 <script>
 
@@ -86,6 +82,11 @@
                         </td>\
                         </tr>');
                 });
+
+                <?php if ( session()->getFlashdata( 'hello' ) ): ?>
+                alertify.set( 'notifier', 'position', 'top-right' );
+                alertify.success("<?= session()->getFlashdata( 'hello' ); ?>");
+                <?php endif; ?>
             }
         });
     }

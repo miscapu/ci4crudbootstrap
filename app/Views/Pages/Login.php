@@ -1,3 +1,6 @@
+<?php
+use \Config\Services;
+?>
 <?= $this->extend( 'Layouts/Main' );?>
 <?= $this->section( 'content' );?>
 
@@ -8,7 +11,7 @@
  * Validations
  */
 if ( isset( $validation ) ){
-    $validation =   \Config\Services::validation();
+    $validation =   Services::validation();
 
     if ( $validation->hasError( 'emailFrm' ) ){
         $errorEmailFrm =   $validation->getError( 'emailFrm' );
@@ -37,17 +40,7 @@ if ( isset( $validation ) ){
              * @since 12.09.2024
              * @author MiSCapu
              -->
-            <?php
-                if ( session()->get( 'success' ) )
-                {
-                    ?>
-                    <div class="alert alert-success">
-                        <?= session()->get( 'success' ); ?>
-                    </div>
-            <?php
-                }
 
-            ?>
 
 
             <!-- form Bootstrap -->
@@ -76,19 +69,25 @@ if ( isset( $validation ) ){
             <div class="my-3">
                 <a href="<?= site_url(  '/register' )?>" class="btn btn-success">Register</a>
             </div>
-
+            <!-- Button register End -->
         </div>
-        <div class="col-3>
+        <div class="col-3">
 
         </div>
     </div>
 </div>
-
 <!-- Grid Bootstrap End -->
-
-
-
 
 <?= $this->endSection();?>
 
+<?= $this->section( 'scripts' );?>
 
+
+<script>
+    <?php if ( session()->getFlashdata( 'success' ) ): ?>
+    alertify.set( 'notifier', 'position', 'top-right' );
+    alertify.success("<?= session()->getFlashdata( 'success' ); ?>");
+    <?php endif; ?>
+</script>
+
+<?= $this->endSection();?>

@@ -56,8 +56,9 @@ class UserController extends BaseController
             }else{
                 $user   =   $this->userModel->where('email', $this->request->getVar( 'emailFrm' ) )->first();
                 $this->setUserSession( $user );
+                $session    =   session();
+                $session->setFlashdata( 'hello', 'Welcome '.$user['name'] );
                 return redirect()->to( '/dashboard' );
-
             }
         }
 
@@ -142,7 +143,7 @@ class UserController extends BaseController
 
                     $this->userModel->save( $newData );
                     $session    =   session();
-                    $session->setFlashdata( 'success', 'Successful registration' );
+                    $session->setFlashdata( 'success', 'Successful registration...' );
                     return redirect()->to( '/' );
                 }
         }

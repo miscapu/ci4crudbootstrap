@@ -7,12 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= isset( $title ) ? esc( $title ) : "";?></title>
     <link rel="stylesheet" href="<?= base_url( 'assets/css/bootstrap.min.css' )?>">
+    <link rel="stylesheet" href="<?= base_url( 'assets/css/alertify.min.css' )?>">
 </head>
 <body>
 
 <?= $this->renderSection( 'content' );?>
 
+<!-- Import JS -->
 
+
+<script src="<?= base_url( 'assets/js/jquery.min.js' )?>"></script>
+<script src="<?= base_url( 'assets/js/popper.min.js' )?>"></script>
+<script src="<?= base_url( 'assets/js/bootstrap.min.js' )?>"></script>
+
+<script src="<?= base_url( 'assets/js/alertify.min.js' )?>"></script>
+
+<script>
+    <?php if ( session()->getFlashdata( 'success' ) ): ?>
+    alertify.set( 'notifier', 'position', 'top-right' );
+    alertify.success("<?= session()->getFlashdata( 'success' ); ?>");
+    <?php endif; ?>
+</script>
+
+<!-- Import JS end-->
 <?= $this->renderSection( 'scripts' );?>
 
 </body>
