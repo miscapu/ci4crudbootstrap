@@ -8,6 +8,7 @@
     <title><?= isset( $title ) ? esc( $title ) : "";?></title>
     <link rel="stylesheet" href="<?= base_url( 'assets/css/bootstrap.min.css' )?>">
     <link rel="stylesheet" href="<?= base_url( 'assets/css/alertify.min.css' )?>">
+    
 </head>
 <body>
 
@@ -22,12 +23,6 @@
 
 <script src="<?= base_url( 'assets/js/alertify.min.js' )?>"></script>
 
-<script>
-    <?php if ( session()->getFlashdata( 'success' ) ): ?>
-    alertify.set( 'notifier', 'position', 'top-right' );
-    alertify.success("<?= session()->getFlashdata( 'success' ); ?>");
-    <?php endif; ?>
-</script>
 
 <!-- Import JS end-->
 <?= $this->renderSection( 'scripts' );?>

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UsersTable extends Migration
+class ProductsTable extends Migration
 {
     public function up()
     {
@@ -21,19 +21,14 @@ class UsersTable extends Migration
                 'constraint'    =>  '200'
             ],
 
-            'email'      =>  [
-                'type'          =>  'VARCHAR',
-                'constraint'    =>  '255'
-            ],
-
-            'password'      =>  [
-                'type'          =>  'VARCHAR',
-                'constraint'    =>  '255'
-            ],
-
-            'role'      =>  [
+            'quantity'      =>  [
                 'type'          =>  'INT',
-                'constraint'    =>  '2'
+                'constraint'    =>  '5'
+            ],
+
+            'price'      =>  [
+                'type'          =>  'INT',
+                'constraint'    =>  '11'
             ],
 
             'created_at'      =>  [
@@ -46,11 +41,11 @@ class UsersTable extends Migration
         ]);
 
         $this->forge->addKey( 'id', true );
-        $this->forge->createTable( 'users', true );
+        $this->forge->createTable( 'products', true );
     }
 
     public function down()
     {
-        $this->forge->dropTable( 'users', true );
+        $this->forge->dropTable( 'products', true );
     }
 }

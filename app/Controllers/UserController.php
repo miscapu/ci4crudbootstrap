@@ -67,6 +67,10 @@ class UserController extends BaseController
     }
 
 
+    /**
+     * @param $user
+     * @return bool
+     */
     public function setUserSession( $user )
     {
         $data   =   [
@@ -158,6 +162,7 @@ class UserController extends BaseController
     public function logout()
     {
         session()->destroy();
+
         return redirect()->to( '/' );
     }
 
