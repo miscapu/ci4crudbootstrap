@@ -58,7 +58,17 @@ class UserController extends BaseController
                 $this->setUserSession( $user );
                 $session    =   session();
                 $session->setFlashdata( 'hello', 'Welcome '.$user['name'] );
-                return redirect()->to( '/dashboard' );
+                /**
+                 * @since 21.09.2024
+                 * @author MiSCapu
+                 * Privileges admin and client
+                 */
+                if ( $user[ 'role' ] == 0 )
+                {
+                    return redirect()->to( '/dashboard' );
+                }else{
+                    return redirect()->to( '/products' );
+                }
             }
         }
 
@@ -77,6 +87,7 @@ class UserController extends BaseController
             'id'         => $user[ 'id' ],
             'name'       => $user[ 'name' ],
             'email'      => $user[ 'email' ],
+            'role'      => $user[ 'role' ],
             'isLoggedIn' => true
         ];
         session()->set( $data );
