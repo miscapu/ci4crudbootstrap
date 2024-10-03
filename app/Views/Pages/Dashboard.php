@@ -4,6 +4,7 @@
 
 <!-- NavBar Bootstrap -->
 <?= $this->include( 'Layouts/NavBar' ); ?>
+
 <!-- NavBar Bootstrap End -->
 
 <!-- Grid Bootstrap -->
@@ -11,6 +12,7 @@
 <h2 class="modal-title text-center my-4"><?= isset( $title ) ? esc( $title ) : "Document"; ?></h2>
 
 <div class="container">
+
     <div class="row">
         <div class="col-2">
 

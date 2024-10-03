@@ -32,7 +32,7 @@ class UserController extends BaseController
             // create rules
             $rules  =   [
                 'emailFrm'  =>  'required|min_length[5]|max_length[50]|valid_email',
-                'pwdFrm'    =>  'required|min_length[4]|max_length[50]',
+                'pwdFrm'    =>  'required|min_length[4]|max_length[50]|validateUser[emailFrm,pwdFrm]',
             ];
             // create messages for rules
             $messages   =   [
@@ -46,7 +46,8 @@ class UserController extends BaseController
                 'pwdFrm'  =>  [
                     'required'      =>  'Enter your password',
                     'min_length'    =>  'Min Length is 5',
-                    'max_length'    =>  'Max Length is 50'
+                    'max_length'    =>  'Max Length is 50',
+                    'validateUser'  =>  'Email or password incorrect'
                 ],
             ];
             // if don't have validate
